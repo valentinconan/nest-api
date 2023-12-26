@@ -1,11 +1,11 @@
-FROM node:16 as build
+#FROM node:16 as build
 
-WORKDIR /app
+#WORKDIR /app
 
-COPY package.json /app/package.json
-RUN npm i
-COPY dist /app/dist
-RUN npm run native
+#COPY package.json /app/package.json
+#RUN npm i
+#COPY dist /app/dist
+#RUN npm run native
 
 FROM alpine:3.16
 ARG VERSION
@@ -13,8 +13,8 @@ ENV APP_VERSION=$VERSION
 
 RUN apk add gcompat libstdc++
 
-COPY --from=build /app/bin/native /
-
+#COPY --from=build /app/bin/native /
+COPY bin/main /native
 RUN chmod +x native
 
 CMD ./native
