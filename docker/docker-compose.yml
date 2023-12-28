@@ -1,13 +1,8 @@
 version: '2.3'
 services:
-  go-bombardier:
-    container_name: go-bombardier
-    image: valentinconan/go-bombardier:master
-    networks:
-      - nest-network
   nest-api:
     hostname: nest-api
-    image: valentinconan/nest-api:master
+    image: valentinconan/nest-api-native:master
     restart: unless-stopped
     healthcheck:
       test: wget -O /dev/null http://localhost:3000/health || exit 1

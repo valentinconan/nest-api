@@ -72,13 +72,11 @@ fi
 
 if [ "$docker" = true ]; then
     echo -e "${yellow}Building docker image...${default}"
-
     docker build --no-cache --build-arg VERSION=0.1.0 -t valentinconan/nest-api:master .
 fi
 
 if [ "$native" = true ]; then
     echo -e "${yellow}Building native docker image...${default}"
-
     docker build --no-cache --build-arg VERSION=0.1.0  -f Dockerfile.native -t valentinconan/nest-api-native:master .
 fi
 
