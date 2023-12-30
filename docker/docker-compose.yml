@@ -1,9 +1,20 @@
 version: '2.3'
 services:
+  db:
+    container_name: db
+    image: postgres:11
+    environment:
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ./volumes:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
   nest-api:
     hostname: nest-api
     image: valentinconan/nest-api-native:master
     restart: unless-stopped
+    environment:
+      - ENTITY_PATH=dist/**/**/*.entity.ts
     healthcheck:
       test: wget -O /dev/null http://localhost:3000/health || exit 1
       interval: 1s
