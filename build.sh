@@ -65,6 +65,7 @@ mkdir package
 cp -r docker/* package/
 
 npm i
+npm run build
 
 if [ "$skip_tests" = false ]; then
     npm test
@@ -77,6 +78,7 @@ fi
 
 if [ "$native" = true ]; then
     echo -e "${yellow}Building native docker image...${default}"
+    npm run native
     docker build --no-cache --build-arg VERSION=0.1.0  -f Dockerfile.native -t valentinconan/nest-api-native:master .
 fi
 

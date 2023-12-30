@@ -1,9 +1,13 @@
 
 import { ConnectionOptions } from 'typeorm';
+import * as process from "process";
 
+let url: string = process.env.DB_URL;
+
+url=url??"postgres://postgres:password@localhost:5432/nest"
 export default {
     type: 'postgres',
-    url: 'postgres://postgres:password@localhost:5432/nest',
+    url: url,
     database: 'filmash',
     entities: ['dist/**/*.entity{.ts,.js}'],
     synchronize: true,
