@@ -14,7 +14,7 @@ export class HealthController{
 
     @Get("/liveness")
     @HttpCode(200)
-    liveness(){
+    async liveness(){
         if(!this.healthService.live()){
             throw new HttpException('Not alive', HttpStatus.BAD_REQUEST);
         }
@@ -22,14 +22,14 @@ export class HealthController{
 
     @Get("/readiness")
     @HttpCode(200)
-    readiness(){
+    async readiness(){
         if(!this.healthService.ready()){
             throw new HttpException('Not ready', HttpStatus.BAD_REQUEST);
         }
     }
     @Get("/probeness")
     @HttpCode(200)
-    probeness(){
+    async probeness(){
         if(!this.healthService.probe()){
             throw new HttpException('Not probe', HttpStatus.BAD_REQUEST);
         }

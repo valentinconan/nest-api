@@ -5,7 +5,7 @@ import {Injectable} from "@nestjs/common";
 export class HealthService{
 
     ready(): boolean{
-        return false
+        return true
     }
     probe(): boolean{
         return true
