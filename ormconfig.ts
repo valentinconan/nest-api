@@ -1,6 +1,7 @@
 
 import { ConnectionOptions } from 'typeorm';
 import * as process from "process";
+import {User} from "./src/user/entity/user/user.entity";
 
 let url: string = process.env.DB_URL;
 
@@ -9,7 +10,7 @@ export default {
     type: 'postgres',
     url: url,
     database: 'filmash',
-    entities: ['dist/**/*.entity{.ts,.js}'],
+    entities: [User],
     synchronize: true,
 } as ConnectionOptions;
 /*

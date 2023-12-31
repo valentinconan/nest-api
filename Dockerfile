@@ -13,4 +13,4 @@ COPY dist /app/dist
 
 
 EXPOSE 3000
-CMD ["node", "/app/dist/main"]
+CMD ["node", "/app/dist/src/main"]
