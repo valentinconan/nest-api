@@ -16,4 +16,9 @@ export class UserController {
     findAll(): Promise<UserDto[]> {
         return this.userService.findAll()
     }
+
+    @Get('/ping')
+    ping():string{
+        return "pong"
+    }
 }
