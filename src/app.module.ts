@@ -1,11 +1,9 @@
 import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './controller/app.controller';
-import { AppService } from './service/app.service';
 import { UserModule } from './user/user.module';
 import { HealthModule } from './health/health.module';
 import config from "../ormconfig";
-import {JwtMiddleware} from "./middleware/jwt/jwt.middleware";
+import {SampleMiddleware} from "./middleware/sample/sample.middleware";
 
 @Module({
   imports: [
@@ -13,13 +11,13 @@ import {JwtMiddleware} from "./middleware/jwt/jwt.middleware";
     UserModule,
     HealthModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer): any {
     consumer
-        .apply(JwtMiddleware)
+        .apply(SampleMiddleware)
         .forRoutes('user');
   }
 }
