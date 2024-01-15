@@ -4,6 +4,7 @@ import { UserModule } from './user/user.module';
 import { HealthModule } from './health/health.module';
 import config from "../ormconfig";
 import {SampleMiddleware} from "./middleware/sample/sample.middleware";
+import { EnvironmentService } from './utils/service/environment/environment.service';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import {SampleMiddleware} from "./middleware/sample/sample.middleware";
     HealthModule
   ],
   controllers: [],
-  providers: [],
+  providers: [EnvironmentService],
 })
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer): any {

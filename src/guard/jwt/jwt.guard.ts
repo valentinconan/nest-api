@@ -2,11 +2,13 @@ import {CanActivate, ExecutionContext, Injectable, UnauthorizedException} from '
 import { JwtService } from '@nestjs/jwt';
 import * as process from "process";
 import { Request } from 'express';
+import {EnvironmentService} from "../../utils/service/environment/environment.service";
 
 @Injectable()
 export class JwtGuard implements CanActivate {
 
-  constructor(private jwtService: JwtService) {
+  constructor(private jwtService: JwtService,
+              private environmentService: EnvironmentService) {
   }
   async canActivate(context: ExecutionContext):Promise<boolean> {
     const request = context.switchToHttp().getRequest();
@@ -18,14 +20,14 @@ export class JwtGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(
           token,
           {
-            secret: process.env.JWT_SECRET
+            secret: this.environmentService.getOrDefault('JWT_SECRET','test')
           }
       );
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
       request['user'] = payload;
-    } catch {
-      throw new UnauthorizedException();
+    } catch (e){
+      throw new UnauthorizedException(e);
     }
     return true;
   }
