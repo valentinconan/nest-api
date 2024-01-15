@@ -1,6 +1,5 @@
 import {CanActivate, ExecutionContext, Injectable, UnauthorizedException} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as process from "process";
 import { Request } from 'express';
 import {EnvironmentService} from "../../utils/service/environment/environment.service";
 

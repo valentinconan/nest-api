@@ -5,13 +5,18 @@ import { HealthModule } from './health/health.module';
 import config from "../ormconfig";
 import {SampleMiddleware} from "./middleware/sample/sample.middleware";
 import { EnvironmentService } from './utils/service/environment/environment.service';
+import {JwtModule} from "@nestjs/jwt/dist/jwt.module";
 
 @Module({
   imports: [
       TypeOrmModule.forRoot(config),
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '60s' },
+    }),
     UserModule,
-    HealthModule
-  ],
+    HealthModule],
   controllers: [],
   providers: [EnvironmentService],
 })

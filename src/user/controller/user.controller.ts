@@ -1,7 +1,6 @@
 import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
 import {UserDto} from "../dto/user.dto/user.dto";
 import {UserService} from "../service/user.service";
-import {GuardsConsumer} from "@nestjs/core/guards";
 import {JwtGuard} from "../../guard/jwt/jwt.guard";
 
 @Controller('user')
