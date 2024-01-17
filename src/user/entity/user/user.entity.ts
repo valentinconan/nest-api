@@ -9,5 +9,4 @@ export class User {
     @Column({nullable:false})
     name: string;
 
-
 }

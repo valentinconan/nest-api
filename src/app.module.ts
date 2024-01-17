@@ -1,25 +1,29 @@
 import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './controller/app.controller';
-import { AppService } from './service/app.service';
 import { UserModule } from './user/user.module';
 import { HealthModule } from './health/health.module';
 import config from "../ormconfig";
-import {JwtMiddleware} from "./middleware/jwt/jwt.middleware";
+import {SampleMiddleware} from "./middleware/sample/sample.middleware";
+import { EnvironmentService } from './utils/service/environment/environment.service';
+import {JwtModule} from "@nestjs/jwt/dist/jwt.module";
 
 @Module({
   imports: [
       TypeOrmModule.forRoot(config),
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '60s' },
+    }),
     UserModule,
-    HealthModule
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    HealthModule],
+  controllers: [],
+  providers: [EnvironmentService],
 })
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer): any {
     consumer
-        .apply(JwtMiddleware)
+        .apply(SampleMiddleware)
         .forRoutes('user');
   }
 }
