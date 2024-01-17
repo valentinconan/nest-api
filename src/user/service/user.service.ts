@@ -15,6 +15,10 @@ export class UserService {
     }
 
     findAll(): Promise<UserDto[]> {
-        return this.userRepository.find()
+        return this.userRepository.find({
+            relations: {
+                country: true,
+            },
+        })
     }
 }

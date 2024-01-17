@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn} from "typeorm";
+import {Country} from "../../../country/entities/country.entity";
 
 @Entity()
 export class User {
@@ -9,4 +10,7 @@ export class User {
     @Column({nullable:false})
     name: string;
 
+    @OneToOne(() => Country, {cascade:true})
+    @JoinColumn()
+    country: Country
 }
