@@ -6,6 +6,7 @@ import config from "../ormconfig";
 import {SampleMiddleware} from "./middleware/sample/sample.middleware";
 import { EnvironmentService } from './utils/service/environment/environment.service';
 import {JwtModule} from "@nestjs/jwt/dist/jwt.module";
+import { CountryModule } from './country/country.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import {JwtModule} from "@nestjs/jwt/dist/jwt.module";
       signOptions: { expiresIn: '60s' },
     }),
     UserModule,
-    HealthModule],
+    HealthModule,
+    CountryModule],
   controllers: [],
   providers: [EnvironmentService],
 })
